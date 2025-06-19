@@ -13,11 +13,17 @@ spec:
     targetRevision: main
     path: app-of-apps/
     helm:
-      parameters:
-      - name: argocd.giropopsSenhas.enabled
-        value: "true"
-      - name: "argocd.randomLogger.enabled"
-        value: "true"
+      # parameters:
+      # - name: argocd.giropopsSenhas.enabled
+      #   value: "true"
+      # - name: "argocd.randomLogger.enabled"
+      #   value: "true"
+      valuesObject:
+        argocd:
+          randomLogger:
+            enabled: true
+          giropopsSenhas:
+            enabled: true
   destination:
     namespace: argocd # can be argocd because a app-of-apps helm doesnt create any resources, only argo applications
     server: https://kubernetes.default.svc
