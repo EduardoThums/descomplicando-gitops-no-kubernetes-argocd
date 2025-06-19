@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/EduardoThums/descomplicando-gitops-no-kubernetes-argocd.git
-    targetRevision: main
+    targetRevision: 0.1.0
     path: random-logger/helm
     helm:
       valueFiles:
