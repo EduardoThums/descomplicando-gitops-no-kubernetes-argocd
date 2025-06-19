@@ -1,2 +1,5 @@
-randomLogger:
-  replicas: 3
+argocd:
+  randomLogger:
+    enabled: true
+  giropopsSenhas:
+    enabled: true

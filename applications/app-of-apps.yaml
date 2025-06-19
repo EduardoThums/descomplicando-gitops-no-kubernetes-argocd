@@ -3,12 +3,19 @@ kind: Application
 metadata:
   name: app-os-apps
   namespace: argocd
+  metadata:
+    annotations:
+      argocd.argoproj.io/sync-options: Prune=confirm
 spec:
   project: default
   source:
     repoURL: https://github.com/EduardoThums/descomplicando-gitops-no-kubernetes-argocd.git
     targetRevision: main
     path: app-of-apps/
+    helm:
+      parameters:
+        - name: argocd.giropopsSenhas.enabled
+          value: false
   destination:
     namespace: argocd # can be argocd because a app-of-apps helm doesnt create any resources, only argo applications
     server: https://kubernetes.default.svc
