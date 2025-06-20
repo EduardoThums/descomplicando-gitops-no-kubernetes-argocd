@@ -14,12 +14,12 @@ spec:
     repoURL: https://github.com/EduardoThums/descomplicando-gitops-no-kubernetes-argocd.git
     targetRevision: main
     path: app-of-apps/
-    # helm:
-      # parameters:
-      # - name: argocd.giropopsSenhas.enabled
-      #   value: "true"
-      # - name: "argocd.randomLogger.enabled"
-      #   value: "true"
+    helm:
+      parameters:
+      - name: argocd.giropopsSenhas.enabled
+        value: "true"
+      - name: "argocd.randomLogger.enabled"
+        value: "true"
       # valuesObject:
       #   argocd:
       #     randomLogger:
