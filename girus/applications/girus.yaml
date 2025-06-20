@@ -15,10 +15,10 @@ spec:
     
     - repoURL: https://github.com/EduardoThums/descomplicando-gitops-no-kubernetes-argocd.git
       targetRevision: main
-      ref: main
+      ref: values
 
   destination:
-    namespace: default
+    namespace: girus
     server: https://kubernetes.default.svc
 
   syncPolicy:
