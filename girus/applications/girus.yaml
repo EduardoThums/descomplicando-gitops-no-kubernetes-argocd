@@ -1,25 +1,26 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: ingress-nginx
+  name: girus
   namespace: argocd
 spec:
   project: default
   sources:
-    - repoURL: https://kubernetes.github.io/ingress-nginx
-      targetRevision: 4.12.3
-      chart: ingress-nginx
+    - repoURL: https://EduardoThums-Girus-PICK.github.io/helm
+      targetRevision: 1.0.8
+      chart: girus
       helm:
         valueFiles:
-          - $values/girus/values/ingress-nginx.yaml
-
+          - $values/girus/values/girus.yaml
+    
     - repoURL: https://github.com/EduardoThums/descomplicando-gitops-no-kubernetes-argocd.git
       targetRevision: main
-      ref: values
+      ref: main
 
   destination:
-    namespace: ingress-nginx
+    namespace: default
     server: https://kubernetes.default.svc
+
   syncPolicy:
     automated:
       selfHeal: true # ensures tha the state of the application in the repo is respected
