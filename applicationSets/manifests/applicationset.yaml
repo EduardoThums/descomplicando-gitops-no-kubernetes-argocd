@@ -11,10 +11,10 @@ spec:
         repoURL: https://github.com/EduardoThums/descomplicando-gitops-no-kubernetes-argocd.git
         revision: main
         directories:
-          - path: applicationSets/app-of-apps
+          - path: applicationSets/apps/*/helm
   template:
     metadata:
-      name: '{{index .path.segments 1}}-guestbook'
+      name: '{{index .path.segments 2}}'
     spec:
       project: default
       sources:
