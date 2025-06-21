@@ -17,14 +17,20 @@ spec:
       name: 'app-of-apps-{{.environment}}-guestbook'
     spec:
       project: default
-      source:
-        repoURL: https://github.com/EduardoThums/descomplicando-gitops-no-kubernetes-argocd.git
-        targetRevision: main
-        path: 'applicationSets/app-of-apps'
-        helm:
-          valuesObject:
-            argocd:
-              environment: '{{.environment}}'
+      sources:
+        - repoURL: https://github.com/EduardoThums/descomplicando-gitops-no-kubernetes-argocd.git
+          targetRevision: main
+          path: 'applicationSets/app-of-apps'
+          helm:
+            valuesObject:
+              argocd:
+                environment: '{{.environment}}'
+            valueFiles:
+              - $values/applicationSets/values.yaml
+          
+        - repoURL: https://github.com/EduardoThums/descomplicando-gitops-no-kubernetes-argocd.git
+          targetRevision: main
+          ref: values
       destination:
         server: 'https://kubernetes.default.svc'
         namespace: '{{.environment}}'
