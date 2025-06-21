@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: random-logger
+  name: '{{.Values.argocd.environment}}-random-logger'
   namespace: argocd
 spec:
   project: default

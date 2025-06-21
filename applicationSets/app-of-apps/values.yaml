@@ -3,3 +3,4 @@ argocd:
     enabled: true
   randomLogger:
     enabled: false
+  environment: "default"

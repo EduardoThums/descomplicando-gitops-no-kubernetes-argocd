@@ -14,13 +14,16 @@ spec:
           - path: applicationSets/configs/*.json
   template:
     metadata:
-      name: '{{index .path.segments 2}}-guestbook'
+      name: 'app-of-apps-{{.environment}}-guestbook'
     spec:
       project: default
       source:
         repoURL: https://github.com/EduardoThums/descomplicando-gitops-no-kubernetes-argocd.git
         targetRevision: main
         path: 'applicationSets/app-of-apps'
+        helm:
+          valuesObject:
+            - environment: '{{.environment}}'
       destination:
         server: 'https://kubernetes.default.svc'
         namespace: '{{.environment}}'
