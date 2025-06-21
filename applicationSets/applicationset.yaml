@@ -1,0 +1,39 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: guestbook
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+    - git:
+        repoURL: https://github.com/EduardoThums/descomplicando-gitops-no-kubernetes-argocd.git
+        revision: main
+        directories:
+          - path: applicationSets/apps/*/helm
+
+  # - list:
+  #     elements:
+  #     - cluster: engineering-dev
+  #       url: https://1.2.3.4
+  #     - cluster: engineering-prod
+  #       url: https://2.4.6.8
+  #     - cluster: finance-preprod
+  #       url: https://9.8.7.6
+  template:
+    metadata:
+      name: '{{index .path.segments 3}}-guestbook'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/EduardoThums/descomplicando-gitops-no-kubernetes-argocd.git
+        targetRevision: HEAD
+        path: '{{.path.path}}'
+      destination:
+        server: 'https://kubernetes.default.svc'
+        namespace: guestbook
+      syncPolicy:
+        automated: {}
+        syncOptions:
+          - CreateNamespace=true
