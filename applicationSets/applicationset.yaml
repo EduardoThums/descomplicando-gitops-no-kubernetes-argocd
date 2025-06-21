@@ -11,7 +11,7 @@ spec:
         repoURL: https://github.com/EduardoThums/descomplicando-gitops-no-kubernetes-argocd.git
         revision: main
         directories:
-          - path: applicationSets/apps-of-apps/*
+          - path: applicationSets/app-of-apps
   template:
     metadata:
       name: '{{index .path.segments 1}}-guestbook'
