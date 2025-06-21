@@ -11,25 +11,24 @@ spec:
         repoURL: https://github.com/EduardoThums/descomplicando-gitops-no-kubernetes-argocd.git
         revision: main
         directories:
-          - path: applicationSets/apps/*/helm
-
-  # - list:
-  #     elements:
-  #     - cluster: engineering-dev
-  #       url: https://1.2.3.4
-  #     - cluster: engineering-prod
-  #       url: https://2.4.6.8
-  #     - cluster: finance-preprod
-  #       url: https://9.8.7.6
+          - path: applicationSets/apps-of-apps/*
   template:
     metadata:
-      name: '{{index .path.segments 3}}-guestbook'
+      name: '{{index .path.segments 1}}-guestbook'
     spec:
       project: default
-      source:
-        repoURL: https://github.com/EduardoThums/descomplicando-gitops-no-kubernetes-argocd.git
-        targetRevision: HEAD
-        path: '{{.path.path}}'
+      sources:
+        - repoURL: https://github.com/EduardoThums/descomplicando-gitops-no-kubernetes-argocd.git
+          targetRevision: main
+          path: '{{.path.path}}'
+          helm:
+            valueFiles:
+              - $values/applicationSets/values.yaml
+
+        - repoURL: https://github.com/EduardoThums/descomplicando-gitops-no-kubernetes-argocd.git
+          targetRevision: main
+          ref: values
+
       destination:
         server: 'https://kubernetes.default.svc'
         namespace: guestbook
