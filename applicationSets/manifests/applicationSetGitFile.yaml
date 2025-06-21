@@ -14,7 +14,7 @@ spec:
           - path: applicationSets/configs/*.json
   template:
     metadata:
-      name: 'app-of-apps-{{.environment}}-guestbook'
+      name: 'app-of-apps-{{.environment}}'
     spec:
       project: default
       sources:
