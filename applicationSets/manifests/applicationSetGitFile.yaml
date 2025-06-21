@@ -23,7 +23,8 @@ spec:
         path: 'applicationSets/app-of-apps'
         helm:
           valuesObject:
-            - environment: '{{.environment}}'
+            argocd:
+              environment: '{{.environment}}'
       destination:
         server: 'https://kubernetes.default.svc'
         namespace: '{{.environment}}'

@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: '{{.Values.argocd.environment}}-giropops-senhas'
+  name: 'giropops-senhas-{{.Values.argocd.environment}}'
   namespace: argocd
 spec:
   project: default
