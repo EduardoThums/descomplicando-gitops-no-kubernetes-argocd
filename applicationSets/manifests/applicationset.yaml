@@ -12,6 +12,8 @@ spec:
         revision: main
         directories:
           - path: applicationSets/apps/*/helm
+          - path: applicationSets/apps/cert-manager/helm
+            exclude: true
   template:
     metadata:
       name: '{{index .path.segments 2}}'
